@@ -1,6 +1,6 @@
 # Run-Time Optimisation for Complex Event Forecasting (_RTCEF_)
 
-_RTCEF_ is a framework for optimisation of Complex Event Foecasting. It contains several services running synergistically over Kafka with the aim of undisrupted CEF, and run-time updating of deployed CEF models for continuous adaptation to input stream evolutions.
+_RTCEF_ is a framework for run-time optimisation of Complex Event Foecasting. It contains several services running synergistically over Kafka with the aim of undisrupted CEF, and run-time updating of deployed CEF models for continuous adaptation to input stream evolutions.
 
 
 ## _RTCEF_
@@ -9,10 +9,23 @@ _RTCEF_ is a framework for optimisation of Complex Event Foecasting. It contains
 Complex Event Forecasting (CEF) is a process whereby Complex Events (CEs) are forecasted over an input stream. For example, in the maritime domain CEF could forecast a CE expressing the arrival of a ship in a specific port, over a stream of maritime positional data.
 For CEF, _RTCEF_, currently supports Wayeb, a Scala implemented CEF engine. In the future more engines/models will be supported.
 
+### Run-time hyper-parameter optimisation
+For many CEF models, hyper-parameters play major role in performance. While offline hyper-parameter optimisation can yield a near optimal set of parameters for a fixed time period, in practice it is not sufficient. This is because our world, and therefore data, is constantly evolving. For example, maritime vessels adapt their routes according to weather, fraudsters adapt their tactics to avoid detection and so on. _RTCEF_ offers the solution to this problem, by allowing run-time optimisation. More specifically it utilises Bayesian optimisation. Furthermore, since hyper-parameter optimisation can be an expensive task, it offers a retrain vs reoptimise policy.  
+
+
+
+
 ### Architecture
 
 ![arch](https://github.com/manospits/rtcef/blob/main/docs/arch.png?raw=true)
 
+As seen in the above figure, _RTCEF_ has five services, the engine, the observer, the collector, the controller and the model factory. These work as follows:
+
+* **Engine:** The engine performs CEF, it reads simple events from the input stream and produces forecasts. Additionally, it produces a stream of performance reports (scores).
+* **Observer:** The observer service, monitors performance of the engine, and using a trend based policy it detects performance deterioration and issues **retrain** or **optimise** instructions.  
+* **Collector:** The collector service, reads in parallel to the engine the input stream. In order to perform model retraining or optimisation appropriate dataset should be used. Therefore the collector using a window based policy retains subsets of the input stream in a sliding window approach and creates dataset versions.
+* **Controller:** The controller service, controls retraining or optimisation procedures. It reads instructions provided by the observer and accordingly commands the factory to create a model via retraining, or initialises an optimisation procedure with the factory, during which the controller serves as the optimiser.
+* **Factory:** The factory service, trains (and tests) models for retraining and optimisation procedures. Once a new model is available, i.e. a retrained model, or the best performing model of an optimisation procedure, the factory sends a model version to the Engine. The engine replaces its underlying model, and continues CEF with the most recent model version. 
 ## Installation
  + _RTCEF_ is mostly implemented in Python 3.9.18, therefore the appropriate python version must be installed.
    + Additionally, the python packages included in the `requirements.txt` should be installed as well.
