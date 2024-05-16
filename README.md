@@ -10,7 +10,9 @@ Complex Event Forecasting (CEF) is a process whereby Complex Events (CEs) are fo
 For CEF, _RTCEF_, currently supports Wayeb, a Scala implemented CEF engine. In the future more engines/models will be supported.
 
 ### Run-time hyper-parameter optimisation
-For many CEF models, hyper-parameters play major role in performance. While offline hyper-parameter optimisation can yield a near optimal set of parameters for a fixed time period, in practice it is not sufficient. This is because our world, and therefore data, is constantly evolving. For example, maritime vessels adapt their routes according to weather, fraudsters adapt their tactics to avoid detection and so on. _RTCEF_ offers the solution to this problem, by allowing run-time optimisation. More specifically it utilises Bayesian optimisation. Furthermore, since hyper-parameter optimisation can be an expensive task, it offers a retrain vs reoptimise policy.  
+For many CEF models, hyper-parameters play major role in performance. While offline hyper-parameter optimisation can yield a near optimal set of parameters for a fixed time period, in practice it is not sufficient. This is because our world, and therefore data, is constantly evolving. For example, maritime vessels adapt their routes according to weather, fraudsters adapt their tactics to avoid detection and so on.
+
+_RTCEF_ offers the solution to this problem, by allowing run-time optimisation for finding near-optimal hyper-paramaters. More specifically, it utilises Bayesian optimisation. Furthermore, since hyper-parameter optimisation can be an expensive task, it offers a retrain vs reoptimise policy. Finally, _RTCEF_ does not hinder performance, as retrain or optimisation procedures happen in parallel to CEF.
 
 
 
