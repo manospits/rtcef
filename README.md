@@ -43,11 +43,11 @@ To run existing experiments navigate to the `scripts` folder.
 2. To start CEF with _RTCEF_ you need a configuration file. In  the `configs` folder there configuration files for maritime situational awareness and credit card fraud detection experiments. To run a specific experiment replace the path of the configuariton file in the `deploy_services.sh` script accordingly. Then run the experiment with ```./deploy_services.sh start``` 
 In case you want to run an experiment without run-time updating of CEF models execute instead: ```./deploy_services.sh start_offline```
 
-3. To stop the framework run ```./deploy_services.sh kill```
+3. To monitor the status of the service, run ```./deploy_services.sh status```
+4. Topic messages, e.g., runtime scores, observer commands etc. are printed in relevantly named files inside the  `data/reader/folder`. 
+4. To stop the framework run ```./deploy_services.sh kill```
 
-**Note:** Before running a new experiment you should ''clean'' the Kafka topics. To do this run:
-
-```./deploy_services.sh clean```
+**Note:** Before running a new experiment you should ''clean'' the Kafka topics. To do this run ```./deploy_services.sh clean```
 
 ## License
 Unless otherwise stated, _RTCEF_, is licenced under LGPL-3.0.  _RTCEF_ comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions; see the [GNU Lesser General Public License v3 for more details](https://www.gnu.org/licenses/lgpl-3.0.en.html#license-text).
