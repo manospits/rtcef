@@ -40,7 +40,7 @@ To run existing experiments navigate to the `scripts` folder.
 
 1. Make sure that Kafka is up (check with `docker composer ps`) and then run ```./deploy_services.sh init ```. This will create the appropriate communication topics in Kafka.
 
-2. To start CEF with _RTCEF_ you need a configuration file. In  the `configs` folder there configuration files for maritime situational awareness and credit card fraud detection experiments. To run a specific experiment replace the path of the configuariton file in the `deploy_services.sh` script accordingly. Then run the experiment with ```./deploy_services.sh start``` 
+2. To start CEF with _RTCEF_ you need a configuration file. In  the `configs` folder there are configuration files (.ini) for maritime situational awareness and credit card fraud detection experiments. To run a specific experiment replace the path of the configuration file in the `deploy_services.sh` script and the path to the project folder (ProjectPath variable) in the configuration file to be used accordingly. Then run the experiment with ```./deploy_services.sh start``` 
 In case you want to run an experiment without run-time updating of CEF models execute instead: ```./deploy_services.sh start_offline```
 
 3. To monitor the status of the service, run ```./deploy_services.sh status```
