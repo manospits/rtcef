@@ -1,6 +1,6 @@
-# Run-Time Optimisation for Complex Event Forecasting (_RTCEF_)
+# Run-Time Adaptation for Complex Event Forecasting (_RTCEF_)
 
-_RTCEF_ is a framework for run-time optimisation of Complex Event Foecasting. It contains several services running synergistically over Kafka with the aim of run-time updating of CEF models for continuous adaptation to input stream evolutions, and undisrupted CEF.
+_RTCEF_ is a framework for run-time adaptation of Complex Event Foecasting. It contains several services running synergistically over Kafka with the aim of run-time updating of CEF models for continuous adaptation to input stream evolutions, and undisrupted CEF.
 
 
 ## _RTCEF_
